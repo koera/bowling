@@ -2,6 +2,7 @@ package com.tdd.bowling.models;
 
 public class Frame {
     private  final int ROLL_NUMBER = 2;
+    private final int PINS_NUMBER = 10;
     private int score = 0;
     private int tries = 0;
     private Frame next;
@@ -13,14 +14,12 @@ public class Frame {
         if(tries < ROLL_NUMBER) {
             score += pinsKnocked;
             tries++;
-            if(tries == 1) {
-                pinKnockedFor1stRoll = pinsKnocked;
-            }
         }
-        if(tries == 1 && pinKnockedFor1stRoll == 10) {
-            strike = true;
+        if(isFirstRoll()) {
+            pinKnockedFor1stRoll = pinsKnocked;
+            strike = pinsKnocked == PINS_NUMBER;
         }
-        if(tries == ROLL_NUMBER && score == 10) {
+        if(tries == ROLL_NUMBER && score == PINS_NUMBER) {
             spare = true;
         }
     }
@@ -41,5 +40,10 @@ public class Frame {
 
     public void setNext(Frame next) {
         this.next = next;
+    }
+
+
+    private boolean isFirstRoll() {
+        return tries == 1;
     }
 }

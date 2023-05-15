@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class FrameTest {
 
+    private final int PINS_NUMBER = 10;
+
     @Test
     void testFrame__score_should_be_equal_to_pins_knocked_down_for_single_roll(){
         Frame frame = new Frame();
@@ -62,7 +64,7 @@ public class FrameTest {
 
         assertEquals(pinsKnockedFor1stRollOfFrame1, frame1.score());
 
-        int expectedScoreForFrame = 10 + pinsKnockedFor1stRollOfFrame1;
+        int expectedScoreForFrame = PINS_NUMBER + pinsKnockedFor1stRollOfFrame1;
         assertEquals(expectedScoreForFrame, frame.score());
     }
 
@@ -80,13 +82,13 @@ public class FrameTest {
 
         frame.setNext(frame1);
 
-        int expectedScoreForFrame = 10 + pinsKnockedFor1stRollOfFrame1;
+        int expectedScoreForFrame = PINS_NUMBER + pinsKnockedFor1stRollOfFrame1;
         assertEquals(expectedScoreForFrame, frame.score());
     }
 
     @Test
-    void testFrame__should_strike_if_players_knocked_down_all_10_pins_on_the_1st_roll(){
-        int pinsKnockedFor1stRoll = 10;
+    void testFrame__should_strike_if_players_knocked_down_all_pins_on_the_1st_roll(){
+        int pinsKnockedFor1stRoll = PINS_NUMBER;
 
         Frame frame = new Frame();
         frame.roll(pinsKnockedFor1stRoll);
@@ -99,7 +101,6 @@ public class FrameTest {
         rollsFrame2Times(frame, pinsKnockedDownForFirstRoll, pinsKnockedDownForSecondRoll);
         return frame;
     }
-
 
     private void rollsFrame2Times(Frame frame, int firstPinKnocked, int secondPinKnocked){
         frame.roll(firstPinKnocked);
