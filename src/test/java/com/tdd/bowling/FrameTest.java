@@ -20,31 +20,27 @@ public class FrameTest {
 
     @Test
     void testFrame__score_should_be_equal_to_the_total_number_of_pins_knocked_down_for_non_single_roll(){
-        Frame frame = new Frame();
-
         int pinsKnockedDownForFirstRoll = 3;
-
-        frame.roll(pinsKnockedDownForFirstRoll);
-
         int pinsKnockedDownForSecondRoll = 4;
 
-        frame.roll(pinsKnockedDownForSecondRoll);
+        Frame frame = new Frame();
 
-        assertEquals((pinsKnockedDownForFirstRoll + pinsKnockedDownForSecondRoll), frame.score());
+        rollsFrame2Times(frame, pinsKnockedDownForFirstRoll, pinsKnockedDownForSecondRoll);
+
+        int expectedScore = pinsKnockedDownForFirstRoll + pinsKnockedDownForSecondRoll;
+
+        assertEquals(expectedScore, frame.score());
     }
 
 
     @Test
     void testFrame__should_spare_if_player_knock_down_all_10_pins_in_2_rolls(){
-        Frame frame = new Frame();
-
         int pinsKnockedDownForFirstRoll = 7;
-
-        frame.roll(pinsKnockedDownForFirstRoll);
-
         int pinsKnockedDownForSecondRoll = 3;
 
-        frame.roll(pinsKnockedDownForSecondRoll);
+        Frame frame = new Frame();
+
+        rollsFrame2Times(frame, pinsKnockedDownForFirstRoll, pinsKnockedDownForSecondRoll);
 
         assertTrue(frame.isSpare());
     }
@@ -52,20 +48,28 @@ public class FrameTest {
 
     @Test
     void testFrame__should_have_bonus_when_spare(){
-        Frame frame = new Frame();
         int pinsKnockedDownForFirstRoll = 7;
-        frame.roll(pinsKnockedDownForFirstRoll);
         int pinsKnockedDownForSecondRoll = 3;
-        frame.roll(pinsKnockedDownForSecondRoll);
 
+        Frame frame = new Frame();
+
+        rollsFrame2Times(frame, pinsKnockedDownForFirstRoll, pinsKnockedDownForSecondRoll);
+
+        int pinsKnockedFor1stRollOfFrame1 = 3;
         Frame frame1 = new Frame();
-
-        frame1.roll(3);
+        frame1.roll(pinsKnockedFor1stRollOfFrame1);
 
         frame.setNext(frame1);
 
-        assertEquals(13, frame.score());
-        assertEquals(3, frame1.score());
+        assertEquals(pinsKnockedFor1stRollOfFrame1, frame1.score());
 
+        int expectedScoreForFrame = 10 + pinsKnockedFor1stRollOfFrame1;
+        assertEquals(expectedScoreForFrame, frame.score());
+    }
+
+
+    private void rollsFrame2Times(Frame frame, int firstPinKnocked, int secondPinKnocked){
+        frame.roll(firstPinKnocked);
+        frame.roll(secondPinKnocked);
     }
 }
