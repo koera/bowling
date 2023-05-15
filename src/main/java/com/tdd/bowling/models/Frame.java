@@ -17,19 +17,43 @@ public class Frame {
         }
         if(isFirstRoll()) {
             pinKnockedFor1stRoll = pinsKnocked;
-            strike = pinsKnocked == PINS_NUMBER;
+            setStrike(pinsKnocked);
         }
+        checkForSpare();
+    }
+
+    private void setStrike(int pinsKnocked) {
+        strike = pinsKnocked == PINS_NUMBER;
+    }
+
+    private void checkForSpare() {
         if(tries == ROLL_NUMBER && score == PINS_NUMBER) {
             spare = true;
         }
     }
 
     public int score(){
-        if(isSpare()) {
-            score+=next.pinKnockedFor1stRoll;
-        }
+        addBonus();
         return score;
     }
+
+    private void addBonus() {
+        if(isSpare()) {
+            addBonusForSpare();
+        }
+        if(isStrike()){
+            addBonusForStrike();
+        }
+    }
+
+    private void addBonusForStrike() {
+        score+= next.score;
+    }
+
+    private void addBonusForSpare() {
+        score+=next.pinKnockedFor1stRoll;
+    }
+
     public boolean isSpare(){
         return spare;
     }

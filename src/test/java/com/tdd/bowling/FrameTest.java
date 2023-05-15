@@ -96,6 +96,23 @@ public class FrameTest {
         assertTrue(frame.isStrike());
     }
 
+    @Test
+    void testFrame__bonus_for_strike_should_be_the_next_2_rolls(){
+        Frame strikeFrame = new Frame();
+        strikeFrame.roll(PINS_NUMBER);
+
+        int pinsKnockedDownForFirstRoll = 3;
+        int pinsKnockedDownForSecondRoll = 5;
+
+        Frame nextFrame = getFrameRolled2Times(pinsKnockedDownForFirstRoll, pinsKnockedDownForSecondRoll);
+        strikeFrame.setNext(nextFrame);
+
+        int expectedScore = PINS_NUMBER + pinsKnockedDownForFirstRoll + pinsKnockedDownForSecondRoll;
+
+        assertEquals(expectedScore, strikeFrame.score());
+
+    }
+
     private Frame getFrameRolled2Times(int pinsKnockedDownForFirstRoll, int pinsKnockedDownForSecondRoll) {
         Frame frame = new Frame();
         rollsFrame2Times(frame, pinsKnockedDownForFirstRoll, pinsKnockedDownForSecondRoll);
