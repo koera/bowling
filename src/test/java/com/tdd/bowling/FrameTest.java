@@ -51,11 +51,10 @@ public class FrameTest {
         int pinsKnockedDownForFirstRoll = 7;
         int pinsKnockedDownForSecondRoll = 3;
 
-        Frame frame = new Frame();
-
-        rollsFrame2Times(frame, pinsKnockedDownForFirstRoll, pinsKnockedDownForSecondRoll);
+        Frame frame = getFrameRolled2Times(pinsKnockedDownForFirstRoll, pinsKnockedDownForSecondRoll);
 
         int pinsKnockedFor1stRollOfFrame1 = 3;
+
         Frame frame1 = new Frame();
         frame1.roll(pinsKnockedFor1stRollOfFrame1);
 
@@ -65,6 +64,30 @@ public class FrameTest {
 
         int expectedScoreForFrame = 10 + pinsKnockedFor1stRollOfFrame1;
         assertEquals(expectedScoreForFrame, frame.score());
+    }
+
+    @Test
+    void testFrame__bonus_for_spare_should_only_the_value_of_the_1st_roll_for_next_frame(){
+
+        Frame frame = getFrameRolled2Times(7, 3);
+
+        int pinsKnockedFor1stRollOfFrame1 = 3;
+        int pinsKnockedFor2ndRollOfFrame1 = 4;
+
+        Frame frame1 = getFrameRolled2Times(
+                pinsKnockedFor1stRollOfFrame1,
+                pinsKnockedFor2ndRollOfFrame1);
+
+        frame.setNext(frame1);
+
+        int expectedScoreForFrame = 10 + pinsKnockedFor1stRollOfFrame1;
+        assertEquals(expectedScoreForFrame, frame.score());
+    }
+
+    private Frame getFrameRolled2Times(int pinsKnockedDownForFirstRoll, int pinsKnockedDownForSecondRoll) {
+        Frame frame = new Frame();
+        rollsFrame2Times(frame, pinsKnockedDownForFirstRoll, pinsKnockedDownForSecondRoll);
+        return frame;
     }
 
 

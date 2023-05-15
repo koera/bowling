@@ -4,15 +4,17 @@ public class Frame {
     private  final int ROLL_NUMBER = 2;
     private int score = 0;
     private int tries = 0;
-
     private Frame next;
-
     private boolean spare;
+    private int pinKnockedFor1stRoll = 0;
 
     public void roll(int pinsKnocked) {
         if(tries < ROLL_NUMBER) {
             score += pinsKnocked;
             tries++;
+            if(tries == 1) {
+                pinKnockedFor1stRoll = pinsKnocked;
+            }
         }
         if(tries == ROLL_NUMBER && score == 10) {
             spare = true;
@@ -21,7 +23,7 @@ public class Frame {
 
     public int score(){
         if(isSpare()) {
-            score+=next.score;
+            score+=next.pinKnockedFor1stRoll;
         }
         return score;
     }
