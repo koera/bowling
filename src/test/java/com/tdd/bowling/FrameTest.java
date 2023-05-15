@@ -84,6 +84,16 @@ public class FrameTest {
         assertEquals(expectedScoreForFrame, frame.score());
     }
 
+    @Test
+    void testFrame__should_strike_if_players_knocked_down_all_10_pins_on_the_1st_roll(){
+        int pinsKnockedFor1stRoll = 10;
+
+        Frame frame = new Frame();
+        frame.roll(pinsKnockedFor1stRoll);
+
+        assertTrue(frame.isStrike());
+    }
+
     private Frame getFrameRolled2Times(int pinsKnockedDownForFirstRoll, int pinsKnockedDownForSecondRoll) {
         Frame frame = new Frame();
         rollsFrame2Times(frame, pinsKnockedDownForFirstRoll, pinsKnockedDownForSecondRoll);
