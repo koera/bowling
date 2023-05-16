@@ -78,4 +78,24 @@ public class GameTest {
 
         assertEquals(expectedScoreForFirstFrame, firstFrame.score());
     }
+
+
+
+    @Test
+    void testGame__3rd_roll_should_be_in_the_2nd_frame(){
+        int firstRoll = 3;
+        int secondRoll = 4;
+        int thirdRoll = 4;
+
+        Game game = new Game();
+
+        game.roll(firstRoll);
+        game.roll(secondRoll);
+        game.roll(thirdRoll);
+
+        Frame secondFrame = game.getFrames().get(1);
+
+        assertEquals(thirdRoll, secondFrame.score());
+    }
+
 }

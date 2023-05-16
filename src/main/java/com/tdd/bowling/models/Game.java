@@ -26,8 +26,13 @@ public class Game {
         if (frame.hasMoreRoll()) {
             frame.roll(pinsKnockedDown);
         } else {
-            currentRollIndex++;
+            rollNextFrame(pinsKnockedDown);
         }
+    }
+
+    private void rollNextFrame(int pinsKnockedDown) {
+        currentRollIndex++;
+        roll(pinsKnockedDown);
     }
 
     public int score() {
