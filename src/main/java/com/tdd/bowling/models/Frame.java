@@ -22,6 +22,32 @@ public class Frame {
         checkForSpare();
     }
 
+    public int score(){
+        addBonus();
+        return score;
+    }
+
+
+    public boolean isSpare(){
+        return spare;
+    }
+
+    public boolean isStrike(){
+        return strike;
+    }
+
+    public void setNext(Frame next) {
+        this.next = next;
+    }
+
+    public Frame getNext() {
+        return next;
+    }
+
+    public boolean hasMoreRoll(){
+        return strike ? false : tries < ROLL_NUMBER;
+    }
+
     private void setStrike(int pinsKnocked) {
         strike = pinsKnocked == PINS_NUMBER;
     }
@@ -30,11 +56,6 @@ public class Frame {
         if(tries == ROLL_NUMBER && score == PINS_NUMBER) {
             spare = true;
         }
-    }
-
-    public int score(){
-        addBonus();
-        return score;
     }
 
     private void addBonus() {
@@ -54,27 +75,7 @@ public class Frame {
         score+=next.pinKnockedFor1stRoll;
     }
 
-    public boolean isSpare(){
-        return spare;
-    }
-
-    public boolean isStrike(){
-        return strike;
-    }
-
-    public void setNext(Frame next) {
-        this.next = next;
-    }
-
-    public Frame getNext() {
-        return next;
-    }
-
     private boolean isFirstRoll() {
         return tries == 1;
-    }
-
-    public boolean hasMoreRoll(){
-        return strike ? false : tries < ROLL_NUMBER;
     }
 }
