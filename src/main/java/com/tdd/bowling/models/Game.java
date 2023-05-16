@@ -9,11 +9,11 @@ public class Game {
 
     private int currentRollIndex = 0;
 
-    public Game(){
+    public Game() {
         frames = new ArrayList<>(FRAME_NUMBER);
         var currentFrame = new Frame();
         frames.add(currentFrame);
-        for(int i = 1; i < FRAME_NUMBER; i++){
+        for (int i = 1; i < FRAME_NUMBER; i++) {
             var next = new Frame();
             currentFrame.setNext(next);
             currentFrame = next;
@@ -21,12 +21,16 @@ public class Game {
         }
     }
 
-    public void roll(int pinsKnockedDown){
-        frames.get(currentRollIndex).roll(pinsKnockedDown);
-        currentRollIndex++;
+    public void roll(int pinsKnockedDown) {
+        var frame = frames.get(currentRollIndex);
+        if (frame.hasMoreRoll()) {
+            frame.roll(pinsKnockedDown);
+        } else {
+            currentRollIndex++;
+        }
     }
 
-    public int score(){
+    public int score() {
         return 0;
     }
 

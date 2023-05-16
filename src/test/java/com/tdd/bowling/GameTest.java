@@ -62,4 +62,20 @@ public class GameTest {
         assertEquals(pinsKnocked, firstFrame.score());
     }
 
+    @Test
+    void testGame__2nd_roll_should_be_in_the_1st_frame(){
+        int firstRoll = 3;
+        int secondRoll = 4;
+
+        Game game = new Game();
+
+        game.roll(firstRoll);
+        game.roll(secondRoll);
+
+        Frame firstFrame = game.getFrames().get(0);
+
+        int expectedScoreForFirstFrame = firstRoll + secondRoll;
+
+        assertEquals(expectedScoreForFirstFrame, firstFrame.score());
+    }
 }

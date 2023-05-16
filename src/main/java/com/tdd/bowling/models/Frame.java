@@ -73,4 +73,8 @@ public class Frame {
     private boolean isFirstRoll() {
         return tries == 1;
     }
+
+    public boolean hasMoreRoll(){
+        return tries < ROLL_NUMBER;
+    }
 }

@@ -113,6 +113,15 @@ public class FrameTest {
 
     }
 
+
+    @Test
+    void testFrame__should_has_more_roll_after_1st_roll(){
+        Frame frame = new Frame();
+        frame.roll(3);
+
+        assertTrue(frame.hasMoreRoll());
+    }
+
     private Frame getFrameRolled2Times(int pinsKnockedDownForFirstRoll, int pinsKnockedDownForSecondRoll) {
         Frame frame = new Frame();
         rollsFrame2Times(frame, pinsKnockedDownForFirstRoll, pinsKnockedDownForSecondRoll);
