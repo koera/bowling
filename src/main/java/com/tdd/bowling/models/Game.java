@@ -30,16 +30,16 @@ public class Game {
         }
     }
 
-    private void rollNextFrame(int pinsKnockedDown) {
-        currentRollIndex++;
-        roll(pinsKnockedDown);
-    }
-
     public int score() {
         return frames.stream().map(Frame::score).reduce(0, Integer::sum);
     }
 
     public List<Frame> getFrames() {
         return this.frames;
+    }
+
+    private void rollNextFrame(int pinsKnockedDown) {
+        currentRollIndex++;
+        roll(pinsKnockedDown);
     }
 }
