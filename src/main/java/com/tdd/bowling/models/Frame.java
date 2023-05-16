@@ -66,6 +66,9 @@ public class Frame {
         this.next = next;
     }
 
+    public Frame getNext() {
+        return next;
+    }
 
     private boolean isFirstRoll() {
         return tries == 1;

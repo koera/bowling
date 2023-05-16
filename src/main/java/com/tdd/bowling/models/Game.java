@@ -7,17 +7,26 @@ public class Game {
     private List<Frame> frames;
     private final int FRAME_NUMBER = 10;
 
+    private int currentRollIndex = 0;
+
     public Game(){
         frames = new ArrayList<>(FRAME_NUMBER);
-        for(int i = 0; i < FRAME_NUMBER; i++){
-            frames.add(new Frame());
+        var currentFrame = new Frame();
+        frames.add(currentFrame);
+        for(int i = 1; i < FRAME_NUMBER; i++){
+            var next = new Frame();
+            currentFrame.setNext(next);
+            currentFrame = next;
+            frames.add(next);
         }
     }
 
-    void roll(int pinsKnockedDown){
+    public void roll(int pinsKnockedDown){
+        frames.get(currentRollIndex).roll(pinsKnockedDown);
+        currentRollIndex++;
     }
 
-    int score(){
+    public int score(){
         return 0;
     }
 
