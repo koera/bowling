@@ -16,7 +16,7 @@ public class Frame {
     private boolean additionalRollAdded;
 
     public void roll(int pinsKnocked) throws NoMoreRollException {
-        if(tries < ROLL_NUMBER) {
+        if (tries < ROLL_NUMBER) {
             addToScore(pinsKnocked);
             tries++;
             savePinsKnockedFor1stRoll(pinsKnocked);
@@ -27,17 +27,17 @@ public class Frame {
 
     }
 
-    public int score(){
+    public int score() {
         addBonus();
         return score;
     }
 
 
-    public boolean isSpare(){
+    public boolean isSpare() {
         return spare;
     }
 
-    public boolean isStrike(){
+    public boolean isStrike() {
         return strike;
     }
 
@@ -49,8 +49,8 @@ public class Frame {
         return next;
     }
 
-    public boolean hasMoreRoll(){
-        if(isFinalFrame() && strikeOrSpare()) return true;
+    public boolean hasMoreRoll() {
+        if (isFinalFrame() && strikeOrSpare()) return true;
         else return !strike && tries < ROLL_NUMBER;
     }
 
@@ -67,7 +67,7 @@ public class Frame {
     }
 
     private void savePinsKnockedFor1stRoll(int pinsKnocked) {
-        if(isFirstRoll()) {
+        if (isFirstRoll()) {
             pinKnockedFor1stRoll = pinsKnocked;
         }
     }
@@ -79,7 +79,7 @@ public class Frame {
     }
 
     private void checkForStrike(int pinsKnocked) {
-        if(isFirstRoll() && pinsKnocked == PINS_NUMBER) {
+        if (isFirstRoll() && pinsKnocked == PINS_NUMBER) {
             strike = true;
             ROLL_NUMBER = 1;
         }
@@ -90,7 +90,7 @@ public class Frame {
     }
 
     private void checkForSpare(int pinsKnocked) {
-        if(sumOfPinsKnockedEqualToPinsNumber(pinsKnocked) && !strike) {
+        if (sumOfPinsKnockedEqualToPinsNumber(pinsKnocked) && !strike) {
             spare = true;
         }
     }
@@ -100,34 +100,38 @@ public class Frame {
     }
 
     private void addBonus() {
-        if(isSpare()) {
+        if (isSpare()) {
             addBonusForSpare();
         }
-        if(isStrike()){
+        if (isStrike()) {
             addBonusForStrike();
         }
     }
 
     private void addBonusForStrike() {
-        addToScore(next.score);
+        if (next != null) {
+            addToScore(next.score);
+        }
     }
 
     private void addBonusForSpare() {
-        addToScore(next.pinKnockedFor1stRoll);
+        if(next!= null) {
+            addToScore(next.pinKnockedFor1stRoll);
+        }
     }
 
     private boolean isFirstRoll() {
         return tries == 1;
     }
 
-    private void addOneMoreRollForFinale(){
-        if(isLastRoll() && isFinalFrame() && strikeOrSpare() && !additionalRollAdded) {
+    private void addOneMoreRollForFinale() {
+        if (isLastRoll() && isFinalFrame() && strikeOrSpare() && !additionalRollAdded) {
             addAdditionalRoll();
         }
     }
 
-    private void addAdditionalRoll(){
-        ROLL_NUMBER+=ADDITIONAL_ROLL_IN_FINAL_FRAME;
+    private void addAdditionalRoll() {
+        ROLL_NUMBER += ADDITIONAL_ROLL_IN_FINAL_FRAME;
         additionalRollAdded = true;
     }
 

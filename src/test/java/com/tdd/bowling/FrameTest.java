@@ -190,6 +190,29 @@ public class FrameTest {
         assertEquals("No more roll", ex.getMessage());
     }
 
+
+    @Test
+    void testFrame__additional_roll_should_be_added_to_the_score_if_strike() throws NoMoreRollException{
+        Frame strikedFrame = new Frame();
+        strikedFrame.setFinalFrame(true);
+
+        strikedFrame.roll(PINS_NUMBER);
+        strikedFrame.roll(PINS_NUMBER);
+
+        assertEquals(PINS_NUMBER + PINS_NUMBER, strikedFrame.score());
+    }
+
+    @Test
+    void testFrame__additional_roll_should_be_added_to_the_score_if_spare() throws NoMoreRollException{
+        Frame sparedFrame = new Frame();
+        sparedFrame.setFinalFrame(true);
+
+        rollsFrame2Times(sparedFrame, 5, 5);
+        sparedFrame.roll(4);
+
+        assertEquals(PINS_NUMBER + 4, sparedFrame.score());
+    }
+
     private Frame getFrameRolled2Times(int pinsKnockedDownForFirstRoll, int pinsKnockedDownForSecondRoll)  throws NoMoreRollException {
         Frame frame = new Frame();
         rollsFrame2Times(frame, pinsKnockedDownForFirstRoll, pinsKnockedDownForSecondRoll);
