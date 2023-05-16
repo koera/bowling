@@ -36,7 +36,7 @@ public class Game {
     }
 
     public int score() {
-        return 0;
+        return frames.stream().map(Frame::score).reduce(0, Integer::sum);
     }
 
     public List<Frame> getFrames() {

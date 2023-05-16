@@ -89,13 +89,35 @@ public class GameTest {
 
         Game game = new Game();
 
-        game.roll(firstRoll);
-        game.roll(secondRoll);
-        game.roll(thirdRoll);
+        rollGame3Times(firstRoll, secondRoll, thirdRoll, game);
 
         Frame secondFrame = game.getFrames().get(1);
 
         assertEquals(thirdRoll, secondFrame.score());
+    }
+
+    @Test
+    void testGame__score_of_the_game_should_be_equal_to_total_of_the_frame_score(){
+        int firstRoll = 3;
+        int secondRoll = 4;
+        int thirdRoll = 4;
+
+        Game game = new Game();
+
+        rollGame3Times(firstRoll, secondRoll, thirdRoll, game);
+
+        Frame firstFrame = game.getFrames().get(0);
+        Frame secondFrame = game.getFrames().get(1);
+
+        int expectedGameScore = firstFrame.score() + secondFrame.score();
+
+        assertEquals(expectedGameScore, game.score());
+    }
+
+    private void rollGame3Times(int firstRoll, int secondRoll, int thirdRoll, Game game) {
+        game.roll(firstRoll);
+        game.roll(secondRoll);
+        game.roll(thirdRoll);
     }
 
 }
