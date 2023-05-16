@@ -132,6 +132,29 @@ public class FrameTest {
         assertFalse(frame.hasMoreRoll());
     }
 
+
+    @Test
+    void testFrame__final_frame_should_have_more_roll_if_strike(){
+        int strikeRoll = PINS_NUMBER;
+
+        Frame frame = new Frame();
+        frame.setFinalFrame(true);
+
+        frame.roll(strikeRoll);
+
+        assertTrue(frame.hasMoreRoll());
+    }
+
+    @Test
+    void testFrame__final_frame_should_have_more_roll_if_spare(){
+        Frame sparedFrame = new Frame();
+        sparedFrame.setFinalFrame(true);
+
+        rollsFrame2Times(sparedFrame, 4, 6);
+
+        assertTrue(sparedFrame.hasMoreRoll());
+    }
+
     private Frame getFrameRolled2Times(int pinsKnockedDownForFirstRoll, int pinsKnockedDownForSecondRoll) {
         Frame frame = new Frame();
         rollsFrame2Times(frame, pinsKnockedDownForFirstRoll, pinsKnockedDownForSecondRoll);

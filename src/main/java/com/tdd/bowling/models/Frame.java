@@ -10,6 +10,8 @@ public class Frame {
     private int pinKnockedFor1stRoll = 0;
     private boolean strike;
 
+    private boolean finalFrame;
+
     public void roll(int pinsKnocked) {
         if(tries < ROLL_NUMBER) {
             score += pinsKnocked;
@@ -45,11 +47,24 @@ public class Frame {
     }
 
     public boolean hasMoreRoll(){
-        return strike ? false : tries < ROLL_NUMBER;
+        if(isFinalFrame() && strikeOrSpare()) return true;
+        else return strike ? false : tries < ROLL_NUMBER;
+    }
+
+    public boolean isFinalFrame() {
+        return finalFrame;
+    }
+
+    public void setFinalFrame(boolean finalFrame) {
+        this.finalFrame = finalFrame;
     }
 
     private void setStrike(int pinsKnocked) {
         strike = pinsKnocked == PINS_NUMBER;
+    }
+
+    private boolean strikeOrSpare() {
+        return strike || spare;
     }
 
     private void checkForSpare() {
