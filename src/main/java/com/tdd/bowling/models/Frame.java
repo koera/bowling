@@ -75,6 +75,6 @@ public class Frame {
     }
 
     public boolean hasMoreRoll(){
-        return tries < ROLL_NUMBER;
+        return strike ? false : tries < ROLL_NUMBER;
     }
 }

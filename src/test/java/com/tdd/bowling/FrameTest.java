@@ -122,6 +122,16 @@ public class FrameTest {
         assertTrue(frame.hasMoreRoll());
     }
 
+    @Test
+    void testFrame__should_not_has_more_roll_after_strike(){
+        int strikeRoll = PINS_NUMBER;
+
+        Frame frame = new Frame();
+        frame.roll(strikeRoll);
+
+        assertFalse(frame.hasMoreRoll());
+    }
+
     private Frame getFrameRolled2Times(int pinsKnockedDownForFirstRoll, int pinsKnockedDownForSecondRoll) {
         Frame frame = new Frame();
         rollsFrame2Times(frame, pinsKnockedDownForFirstRoll, pinsKnockedDownForSecondRoll);

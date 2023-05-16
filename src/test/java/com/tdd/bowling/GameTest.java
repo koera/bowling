@@ -97,6 +97,24 @@ public class GameTest {
     }
 
     @Test
+    void testGame__frame_should_be_completed_with_single_roll_for_strike(){
+        int strikeRoll = 10;
+
+        Game game = new Game();
+        game.roll(strikeRoll);
+
+        var firstFrame = game.getFrames().get(0);
+
+        int secondRoll = 5;
+        game.roll(secondRoll);
+
+        var secondFrame = game.getFrames().get(1);
+
+        assertEquals(secondRoll, secondFrame.score());
+        assertEquals(strikeRoll + secondRoll, firstFrame.score());
+    }
+
+    @Test
     void testGame__score_of_the_game_should_be_equal_to_total_of_the_frame_score(){
         int firstRoll = 3;
         int secondRoll = 4;
