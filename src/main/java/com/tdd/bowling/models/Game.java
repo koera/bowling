@@ -17,6 +17,7 @@ public class Game {
         frames.add(currentFrame);
         for (int i = 1; i < FRAME_NUMBER; i++) {
             var next = new Frame();
+            addFinal(i, next);
             currentFrame.setNext(next);
             currentFrame = next;
             frames.add(next);
@@ -38,6 +39,12 @@ public class Game {
 
     public List<Frame> getFrames() {
         return this.frames;
+    }
+
+    private void addFinal(int i, Frame next) {
+        if(i == FRAME_NUMBER -1) {
+            next.setFinalFrame(true);
+        }
     }
 
     private void rollNextFrame(int pinsKnockedDown)  throws NoMoreRollException {

@@ -133,6 +133,15 @@ public class GameTest {
         assertEquals(expectedGameScore, game.score());
     }
 
+    @Test
+    void testGame__final_frame_should_has_final_field_true(){
+        Game game = new Game();
+
+        var finalFrame = game.getFrames().get(EXPECTED_FRAME_NUMBER-1);
+
+        assertTrue(finalFrame.isFinalFrame());
+    }
+
     private void rollGame3Times(int firstRoll, int secondRoll, int thirdRoll, Game game)  throws NoMoreRollException {
         game.roll(firstRoll);
         game.roll(secondRoll);
