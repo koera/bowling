@@ -1,10 +1,12 @@
 package com.tdd.bowling.models;
 
+import com.tdd.bowling.exception.NoMoreRollException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private List<Frame> frames;
+    private final List<Frame> frames;
     private final int FRAME_NUMBER = 10;
 
     private int currentRollIndex = 0;
@@ -21,7 +23,7 @@ public class Game {
         }
     }
 
-    public void roll(int pinsKnockedDown) {
+    public void roll(int pinsKnockedDown)  throws NoMoreRollException {
         var frame = frames.get(currentRollIndex);
         if (frame.hasMoreRoll()) {
             frame.roll(pinsKnockedDown);
@@ -38,7 +40,7 @@ public class Game {
         return this.frames;
     }
 
-    private void rollNextFrame(int pinsKnockedDown) {
+    private void rollNextFrame(int pinsKnockedDown)  throws NoMoreRollException {
         currentRollIndex++;
         roll(pinsKnockedDown);
     }

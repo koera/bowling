@@ -1,5 +1,6 @@
 package com.tdd.bowling;
 
+import com.tdd.bowling.exception.NoMoreRollException;
 import com.tdd.bowling.models.Frame;
 import com.tdd.bowling.models.Game;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ public class GameTest {
     private final int EXPECTED_FRAME_NUMBER = 10;
 
     @Test
-    void testGame__game_should_has_frames(){
+    void testGame__game_should_has_frames() {
 
         Game game = new Game();
 
@@ -52,7 +53,7 @@ public class GameTest {
     }
 
     @Test
-    void testGame__should_roll_frame_when_roll_a_game(){
+    void testGame__should_roll_frame_when_roll_a_game()  throws NoMoreRollException {
         int pinsKnocked = 8;
 
         Game game = new Game();
@@ -63,7 +64,7 @@ public class GameTest {
     }
 
     @Test
-    void testGame__2nd_roll_should_be_in_the_1st_frame(){
+    void testGame__2nd_roll_should_be_in_the_1st_frame()  throws NoMoreRollException{
         int firstRoll = 3;
         int secondRoll = 4;
 
@@ -82,7 +83,7 @@ public class GameTest {
 
 
     @Test
-    void testGame__3rd_roll_should_be_in_the_2nd_frame(){
+    void testGame__3rd_roll_should_be_in_the_2nd_frame()  throws NoMoreRollException{
         int firstRoll = 3;
         int secondRoll = 4;
         int thirdRoll = 4;
@@ -97,7 +98,7 @@ public class GameTest {
     }
 
     @Test
-    void testGame__frame_should_be_completed_with_single_roll_for_strike(){
+    void testGame__frame_should_be_completed_with_single_roll_for_strike()  throws NoMoreRollException{
         int strikeRoll = 10;
 
         Game game = new Game();
@@ -115,7 +116,7 @@ public class GameTest {
     }
 
     @Test
-    void testGame__score_of_the_game_should_be_equal_to_total_of_the_frame_score(){
+    void testGame__score_of_the_game_should_be_equal_to_total_of_the_frame_score()  throws NoMoreRollException{
         int firstRoll = 3;
         int secondRoll = 4;
         int thirdRoll = 4;
@@ -132,7 +133,7 @@ public class GameTest {
         assertEquals(expectedGameScore, game.score());
     }
 
-    private void rollGame3Times(int firstRoll, int secondRoll, int thirdRoll, Game game) {
+    private void rollGame3Times(int firstRoll, int secondRoll, int thirdRoll, Game game)  throws NoMoreRollException {
         game.roll(firstRoll);
         game.roll(secondRoll);
         game.roll(thirdRoll);
